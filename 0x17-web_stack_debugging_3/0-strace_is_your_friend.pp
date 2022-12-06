@@ -1,6 +1,6 @@
-# Apache returns 500; use this script to fix typo in config
+# Fix 500 error when a GET HTTP method is requested to Apache web server
 
-exec { 'fix config typo':
-  command => "sed -i 's/.phpp/.php/' /var/www/html/wp-settings.php",
-  path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+exec {'replace':
+  provider => shell,
+  command  => 'sed -i "s/phpp/php/g" /var/www/html/wp-settings.php'
 }
